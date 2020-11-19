@@ -10,6 +10,7 @@
 
 import sqlite3
 from cryptography.fernet import Fernet
+
 key = bytes("0dzuqY18ULkPRa5z8bVTwx0aB2tHVAMkOb4noayA_-I=", 'utf-8')
 cipher_suite = Fernet(key)
 print(key)
@@ -22,7 +23,12 @@ def login(username, password):
 	c.execute('SELECT * FROM users WHERE username = ?', (username,))
 	ciphered_password = c.fetchall()[0][1]
 	unciphered = cipher_suite.decrypt(ciphered_password).decode('utf-8')
-	print(unciphered)
+
+	if password==unciphered:
+		return True
+	else:
+		return False
+
 
 def signup(username, password):
 	c = db.cursor()
@@ -39,12 +45,6 @@ def signup(username, password):
 		print("success")
 	else: 
 		return False
-
-if (__name__ == '__main__'):
-	print("done")
-	signup("rohn", "password")
-	login("rohn", "password")
-	db.commit()
 
   
 # Execute sql statement and grab all records where the "usuario" and

@@ -11,8 +11,8 @@
 from PySide2.QtCore import *
 from PySide2.QtGui import *
 from PySide2.QtWidgets import *
+from auth_connect import login
 import sys
-
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -29,22 +29,27 @@ class Ui_MainWindow(object):
         font.setPointSize(44)
         self.Heading.setFont(font)
         self.Heading.setAlignment(Qt.AlignCenter)
+
         self.Login = QPushButton(self.centralwidget)
         self.Login.setObjectName(u"Login")
         self.Login.setGeometry(QRect(260, 290, 131, 41))
+
         self.SignUp = QPushButton(self.centralwidget)
         self.SignUp.setObjectName(u"SignUp")
         self.SignUp.setGeometry(QRect(400, 290, 131, 41))
+
         self.Username = QLineEdit(self.centralwidget)
         self.Username.setObjectName(u"Username")
         self.Username.setGeometry(QRect(300, 170, 191, 51))
         self.Username.setMaxLength(50)
         self.Username.setAlignment(Qt.AlignCenter)
+
         self.Password = QLineEdit(self.centralwidget)
         self.Password.setObjectName(u"Password")
         self.Password.setGeometry(QRect(300, 230, 191, 51))
         self.Password.setMaxLength(50)
         self.Password.setAlignment(Qt.AlignCenter)
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
@@ -73,7 +78,21 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
         self.setupUi(self)
-     
+        self.connectMe()
+    
+    def connectMe(self):
+        self.Login.clicked.connect(self.btnLoginListener)
+
+    def btnLoginListener(self):
+        username=self.Username.text()
+        password=self.Password.text()
+
+        if username=="" or password=="":
+            return
+
+        if login(username, password):
+            print("redirect to dashboard")
+
 
 if (__name__ == '__main__'):
 
