@@ -12,7 +12,10 @@ from PySide2.QtCore import *
 from PySide2.QtGui import *
 from PySide2.QtWidgets import *
 import sys
-from auth_connect import login, signup, checkUsername
+from sqlhandlermodule import SqlHandler
+
+currentUser = ""
+handler = SqlHandler()
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -102,35 +105,37 @@ class Ui_MainWindow(object):
         self.checkUsernameLabel.setObjectName(u"checkUsername")
         self.checkUsernameLabel.setGeometry(QRect(500, 200, 271, 21))
         self.stackedWidget.addWidget(self.signuppage)
+
+        #details
         self.Details = QWidget()
         self.Details.setObjectName(u"Details")
         self.Heading_4 = QLabel(self.Details)
         self.Heading_4.setObjectName(u"Heading_4")
-        self.Heading_4.setGeometry(QRect(130, 120, 391, 61))
+        self.Heading_4.setGeometry(QRect(40, 80, 711, 71))
         font1 = QFont()
         font1.setPointSize(43)
         self.Heading_4.setFont(font1)
         self.Heading_4.setAlignment(Qt.AlignCenter)
         self.Age = QLabel(self.Details)
         self.Age.setObjectName(u"Age")
-        self.Age.setGeometry(QRect(160, 210, 71, 41))
+        self.Age.setGeometry(QRect(100, 200, 121, 51))
         font2 = QFont()
         font2.setPointSize(25)
         self.Age.setFont(font2)
         self.Age.setAlignment(Qt.AlignCenter)
         self.Gender = QLabel(self.Details)
         self.Gender.setObjectName(u"Gender")
-        self.Gender.setGeometry(QRect(120, 260, 111, 41))
+        self.Gender.setGeometry(QRect(40, 250, 181, 51))
         self.Gender.setFont(font2)
         self.Gender.setAlignment(Qt.AlignCenter)
         self.Weight = QLabel(self.Details)
         self.Weight.setObjectName(u"Weight")
-        self.Weight.setGeometry(QRect(120, 310, 111, 41))
+        self.Weight.setGeometry(QRect(40, 300, 181, 51))
         self.Weight.setFont(font2)
         self.Weight.setAlignment(Qt.AlignCenter)
         self.Height = QLabel(self.Details)
         self.Height.setObjectName(u"Height")
-        self.Height.setGeometry(QRect(120, 360, 111, 41))
+        self.Height.setGeometry(QRect(50, 350, 171, 51))
         self.Height.setFont(font2)
         self.Height.setAlignment(Qt.AlignCenter)
         self.AgeInput = QLineEdit(self.Details)
@@ -155,6 +160,9 @@ class Ui_MainWindow(object):
         self.Female = QRadioButton(self.groupBox)
         self.Female.setObjectName(u"Female")
         self.Female.setGeometry(QRect(60, 20, 99, 20))
+        self.detailsSubmit = QPushButton(self.Details)
+        self.detailsSubmit.setObjectName(u"detailsSubmit")
+        self.detailsSubmit.setGeometry(QRect(220, 430, 141, 61))
         self.stackedWidget.addWidget(self.Details)
         
         MainWindow.setCentralWidget(self.centralwidget)
@@ -189,7 +197,7 @@ class Ui_MainWindow(object):
         self.signUpUsername.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Username", None))
         self.signUpPassword.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Password", None))
         self.signUpBack.setText(QCoreApplication.translate("MainWindow", u"Back", None))
-        self.checkUsername.setText("")
+        self.checkUsernameLabel.setText("")
         self.Heading_4.setText(QCoreApplication.translate("MainWindow", u"Personal Information", None))
         self.Age.setText(QCoreApplication.translate("MainWindow", u"Age:", None))
         self.Gender.setText(QCoreApplication.translate("MainWindow", u"Gender:", None))
@@ -199,6 +207,7 @@ class Ui_MainWindow(object):
         self.Male.setText(QCoreApplication.translate("MainWindow", u"Male", None))
         self.Other.setText(QCoreApplication.translate("MainWindow", u"Other", None))
         self.Female.setText(QCoreApplication.translate("MainWindow", u"Female", None))
+        self.detailsSubmit.setText(QCoreApplication.translate("MainWindow", u"Submit", None))
     # retranslateUi
 
 
@@ -217,8 +226,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.signUpBack.clicked.connect(self.btnhomeBackListener)
         self.Login.clicked.connect(self.btnLoginListener)
         self.Signup.clicked.connect(self.btnSignupListener)
-        self.signUpUsername.textChanged.connect(self.checkSignupUsername)
-
+        #self.signUpUsername.textChanged.connect(self.checkSignupUsername)
+        self.detailsSubmit.clicked.connect(self.btndetailsSubmit)
 
 
     def checkSignupUsername(self):
@@ -249,7 +258,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if username=="" or password=="":
             return
 
-        if login(username, password):
+        if handler.login(username, password):
+            currentUser= username
             print("redirect to dashboard")
 
     def btnSignupListener(self):
@@ -259,8 +269,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if username=="" or password=="":
             return
 
-        if signup(username, password):
-            print("redirect to dashboard")
+        if handler.signup(username, password):
+            currentUser=username
+            self.stackedWidget.setCurrentIndex(3)
+
+    def btndetailsSubmit(self):
+        age = self.AgeInput.text()
+        weight = self.WeightInput.text()
+
 
 if (__name__ == '__main__'):
 

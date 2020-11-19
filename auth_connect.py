@@ -52,10 +52,12 @@ def signup(username, password):
 	c.execute('SELECT * FROM users WHERE username = ? AND password = ?', (username, ciphered_password))
 
 	if c.fetchall():
-		db.commit()
+		#db.commit()
 		return True
 	else: 
 		return False
+
+def setUserInfo(username, age, gender, weight, height):
 
   
 # Execute sql statement and grab all records where the "usuario" and
