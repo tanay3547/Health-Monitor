@@ -19,6 +19,11 @@ c = db.cursor()
 
 def login(username, password):
 	c.execute('SELECT * FROM users WHERE username = ?', (username,))
+	if c.fetchall():
+		c.execute('SELECT * FROM users WHERE username = ?', (username,))
+	else:
+		return False
+
 	ciphered_password = c.fetchall()[0][1]
 	unciphered = cipher_suite.decrypt(ciphered_password).decode('utf-8')
 
