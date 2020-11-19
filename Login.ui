@@ -17,90 +17,254 @@
    <bool>false</bool>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="Heading">
+   <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>80</y>
-      <width>331</width>
-      <height>101</height>
+      <x>10</x>
+      <y>10</y>
+      <width>771</width>
+      <height>531</height>
      </rect>
     </property>
-    <property name="font">
-     <font>
-      <pointsize>44</pointsize>
-     </font>
+    <property name="currentIndex">
+     <number>2</number>
     </property>
-    <property name="text">
-     <string>Health Monitor</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Login">
-    <property name="geometry">
-     <rect>
-      <x>260</x>
-      <y>290</y>
-      <width>131</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Login</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="SignUp">
-    <property name="geometry">
-     <rect>
-      <x>400</x>
-      <y>290</y>
-      <width>131</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Sign Up</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="Username">
-    <property name="geometry">
-     <rect>
-      <x>300</x>
-      <y>170</y>
-      <width>191</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="maxLength">
-     <number>50</number>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-    <property name="placeholderText">
-     <string>Username</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="Password">
-    <property name="geometry">
-     <rect>
-      <x>300</x>
-      <y>230</y>
-      <width>191</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="maxLength">
-     <number>50</number>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-    <property name="placeholderText">
-     <string>Password</string>
-    </property>
+    <widget class="QWidget" name="homepage">
+     <widget class="QLabel" name="Heading_2">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>70</y>
+        <width>511</width>
+        <height>101</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>44</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Health Monitor</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="homeLogin">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>220</y>
+        <width>191</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Login</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="homeSignup">
+      <property name="geometry">
+       <rect>
+        <x>380</x>
+        <y>220</y>
+        <width>191</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Signup</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="loginpage">
+     <widget class="QLineEdit" name="logInPassword">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>270</y>
+        <width>191</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="maxLength">
+       <number>50</number>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="placeholderText">
+       <string>Password</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Heading">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>100</y>
+        <width>511</width>
+        <height>101</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>44</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Health Monitor</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="logInUsername">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>210</y>
+        <width>191</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="maxLength">
+       <number>50</number>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="placeholderText">
+       <string>Username</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="Login">
+      <property name="geometry">
+       <rect>
+        <x>320</x>
+        <y>330</y>
+        <width>131</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Login</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="loginBack">
+      <property name="geometry">
+       <rect>
+        <x>320</x>
+        <y>380</y>
+        <width>131</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Back</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="signuppage">
+     <widget class="QPushButton" name="Signup">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>310</y>
+        <width>131</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Signup</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Heading_3">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>80</y>
+        <width>511</width>
+        <height>101</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>44</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Health Monitor</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="signUpUsername">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>190</y>
+        <width>191</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="maxLength">
+       <number>50</number>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="placeholderText">
+       <string>Username</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="signUpPassword">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>250</y>
+        <width>191</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="maxLength">
+       <number>50</number>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="placeholderText">
+       <string>Password</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="signUpBack">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>360</y>
+        <width>131</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Back</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="checkUsername">
+      <property name="geometry">
+       <rect>
+        <x>500</x>
+        <y>200</y>
+        <width>271</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -109,7 +273,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>24</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>

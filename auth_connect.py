@@ -13,13 +13,11 @@ from cryptography.fernet import Fernet
 
 key = bytes("0dzuqY18ULkPRa5z8bVTwx0aB2tHVAMkOb4noayA_-I=", 'utf-8')
 cipher_suite = Fernet(key)
-print(key)
-
 
 db = sqlite3.connect('mydb.db')
+c = db.cursor()
 
 def login(username, password):
-	c = db.cursor()
 	c.execute('SELECT * FROM users WHERE username = ?', (username,))
 	ciphered_password = c.fetchall()[0][1]
 	unciphered = cipher_suite.decrypt(ciphered_password).decode('utf-8')
@@ -30,9 +28,14 @@ def login(username, password):
 		return False
 
 
-def signup(username, password):
-	c = db.cursor()
+def checkUsername(username):
+	c.execute('SELECT * FROM users WHERE username = ?', (username,))
+	if c.fetchall():
+		return True
+	else:
+		return False
 
+def signup(username, password):
 	c.execute('SELECT * FROM users WHERE username = ?', (username,))
 	if c.fetchall():
 		print("Username exists")
@@ -40,9 +43,12 @@ def signup(username, password):
 
 	ciphered_password = cipher_suite.encrypt(bytes(password, 'utf-8'))   #required to be bytes
 	c.execute('INSERT INTO users (username, password) VALUES (?,?)', (username, ciphered_password))
+
 	c.execute('SELECT * FROM users WHERE username = ? AND password = ?', (username, ciphered_password))
+
 	if c.fetchall():
-		print("success")
+		db.commit()
+		return True
 	else: 
 		return False
 
